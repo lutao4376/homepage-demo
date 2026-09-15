@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================
+  个人主页 · index.html
+  -----------------------------------------------------------
+  内容依据「卢涛 个人简历 2026.8.12」整理。
+  注意：简历上的手机号未写入本页 —— 这是公开页面，手机号容易被
+        爬虫抓取，如需展示请自行确认后再加。
+        邮箱用的是简历上的上财校园邮箱，想换随时说。
+  ===========================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卢涛 · 个人主页</title>
+<style>
+  :root{
+    --ink:#171717;
+    --paper:#FDFCFA;
+    --paper-2:#F4F2EC;
+    --accent:#0D6E6E;
+    --accent-soft:#E4F1F0;
+    --muted:#6E6E6E;
+    --line:#E6E2DA;
+    --radius:16px;
+  }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",
+                -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background-color:var(--paper);
+    color:var(--ink);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+
+  /* 小标签：区块的英文眉题 */
+  .eyebrow{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+
+  /* ============ 顶部 ============ */
+  .hero{
+    background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%);
+    padding:96px 0 72px;
+  }
+  .hero h1{
+    font-size:clamp(36px,6vw,54px);
+    font-weight:800;
+    letter-spacing:.01em;
+    line-height:1.15;
+    margin-bottom:14px;
+  }
+  .hero .role{
+    font-size:17px;
+    color:var(--muted);
+    max-width:560px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    list-style:none;
+    margin-top:26px;
+  }
+  .tags li{
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent);
+    background-color:var(--accent-soft);
+    border-radius:999px;
+    padding:6px 14px;
+  }
+
+  /* ============ 通用区块 ============ */
+  .section{padding:64px 0}
+  .section--alt{background-color:#FFFFFF}
+
+  .section h2{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.3;
+    padding-left:16px;
+    border-left:4px solid var(--accent);
+    margin-bottom:22px;
+  }
+
+  .prose p{
+    font-size:16.5px;
+    color:var(--muted);
+    max-width:740px;
+    margin-bottom:16px;
+  }
+  .prose strong{color:var(--ink);font-weight:700}
+
+  /* ============ 项目卡片 ============ */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    background-color:#FFFFFF;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  /* 顶部那条强调线，hover 时从左展开 */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;
+    height:3px;
+    background-color:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .3s ease;
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    border-color:var(--accent);
+    box-shadow:0 14px 32px rgba(13,110,110,.13);
+  }
+  .card:hover::before{transform:scaleX(1)}
+
+  .card .num{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.14em;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .card h3{
+    font-size:19px;
+    font-weight:700;
+    line-height:1.45;
+    margin-bottom:10px;
+  }
+  .card p{
+    flex:1;
+    font-size:15px;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+  .card .course{
+    align-self:flex-start;
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent);
+    background-color:var(--accent-soft);
+    border-radius:999px;
+    padding:6px 14px;
+  }
+
+  /* ============ 联系方式 ============ */
+  .contact{
+    background-color:var(--ink);
+    color:#FFFFFF;
+    border-radius:20px;
+    padding:52px 44px;
+  }
+  .contact .eyebrow{color:#7FD1CE}
+  .contact h2{
+    color:#FFFFFF;
+    border-left-color:#7FD1CE;
+  }
+  .contact .lead{
+    color:rgba(255,255,255,.85);
+    max-width:600px;
+    margin-bottom:26px;
+  }
+  .contact-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    list-style:none;
+  }
+  .contact-list li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:15px;
+    background-color:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    padding:12px 18px;
+  }
+  .contact-list .label{color:rgba(255,255,255,.6)}
+  .contact-list a{
+    color:#FFFFFF;
+    font-weight:600;
+    text-decoration:none;
+    border-bottom:1px dashed rgba(255,255,255,.45);
+  }
+  .contact-list a:hover{border-bottom-style:solid}
+
+  /* ============ 页脚 ============ */
+  .footer{
+    margin-top:40px;
+    padding:34px 0;
+    border-top:1px solid var(--line);
+    text-align:center;
+    font-size:13px;
+    letter-spacing:.06em;
+    color:var(--muted);
+  }
+
+  /* ============ 响应式 ============ */
+  @media (max-width:860px){
+    .wrap{padding:0 20px}
+    .hero{padding:64px 0 52px}
+    .section{padding:48px 0}
+    .grid{grid-template-columns:1fr}
+    .contact{padding:38px 26px;border-radius:16px}
+  }
+
+  /* 尊重系统的"减少动态效果"设置 */
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ========== 顶部：姓名 + 身份 ========== -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Personal Homepage</p>
+      <h1>卢涛</h1>
+      <p class="role">复旦大学 国际商务硕士在读 · 市场营销 + 计算机复合背景</p>
+      <ul class="tags">
+        <li>Python</li>
+        <li>SQL</li>
+        <li>数据分析建模</li>
+        <li>用户分层运营</li>
+        <li>AI 初学者</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ========== 简介 ========== -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <h2>简介</h2>
+      <div class="prose">
+        <p>你好，我是<strong>卢涛</strong>。目前在复旦大学经济学院读国际商务硕士，本科毕业于上海财经大学市场营销专业，第二专业是计算机科学与技术。这个"业务 + 技术"的组合，让我习惯了在<strong>业务问题</strong>和<strong>技术实现</strong>之间来回切换。</p>
+        <p>说起来，在 AI 这件事上我还是个新手。过去几年我用 Excel、SPSS 和 Python 做过不少数据分析——搭建 RFM 用户分层模型、做销售趋势预测、输出竞品分析周报——但大模型这类工具对我来说仍然是需要从头学起的东西。我希望通过这门<strong>人工智能与数据分析</strong>课程，把 AI 真正变成日常用得上的能力，而不只是"听说过"。这个仓库会记录我在这门课上的探索。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 项目 ========== -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <p class="eyebrow">Experience</p>
+      <h2>实习经历</h2>
+      <div class="grid">
+
+        <article class="card">
+          <span class="num">01</span>
+          <h3>微创医疗 · 市场部</h3>
+          <p>参与国内外学术会议及商务活动的全流程执行，协调内部团队与外部供应商；更新 30+ 个官网页面、核对 200+ 条 UI 文案，并汇总覆盖 20+ 个国家/地区的销售数据，搭建可视化仪表盘支持海外市场决策。</p>
+          <span class="course">2026.05 – 2026.08</span>
+        </article>
+
+        <article class="card">
+          <span class="num">02</span>
+          <h3>时代天使 · 专业市场</h3>
+          <p>基于医生成交量数据，用 Excel 搭建 RFM 分层模型，筛选高价值核心医生并制定差异化触达策略，活动邀约转化率提升 20%；参与 5 场行业分享会与口腔行业博览会的策划落地。</p>
+          <span class="course">2024.07 – 2024.10</span>
+        </article>
+
+        <article class="card">
+          <span class="num">03</span>
+          <h3>广发银行 · 业务方向</h3>
+          <p>跟踪本地金融市场利率走势与信贷政策，搜集多家同业竞品的贷款利率、授信规则与获客活动信息，每周输出市场竞品分析周报，为业务决策提供参考。</p>
+          <span class="course">2023.07 – 2023.08</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 联系方式 ========== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="contact">
+        <p class="eyebrow">Contact</p>
+        <h2>联系方式</h2>
+        <p class="lead">如果你也在学 AI，或者想聊聊数据分析、用户运营相关的事，欢迎随时找我交流。</p>
+        <ul class="contact-list">
+          <li>
+            <span class="label">邮箱</span>
+            <a href="mailto:lutao@163.sufe.edu.cn">lutao@163.sufe.edu.cn</a>
+          </li>
+          <li>
+            <span class="label">GitHub</span>
+            <a href="https://github.com/lutao4376">github.com/lutao4376</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 页脚 ========== -->
+  <footer class="footer">
+    <div class="wrap">
+      <p>© 2026 卢涛 · 从数据到 AI，持续学习</p>
+    </div>
+  </footer>
+
+</body>
+</html>
